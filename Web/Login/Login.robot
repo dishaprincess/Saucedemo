@@ -349,12 +349,11 @@ Clicking on sort icon # Sort in descending order (A-z)
     ${ProductNames}  Create List
     FOR    ${Itemlistobject}    IN    @{Itemlist}
      Log    ${Itemlistobject}
-
     END
     Sleep   10s
     ${Producttext}      GetText     ${Itemlistobject}
     Log    ${ProductNames}
-    Append To List    ${ProductNames}    ${Producttext}
+    Append To List    ${ProductNames}    ${Producttext}                  ## add an element to existing list
     ${sortedproductname}    copy list  ${ProductNames}
     Sort List    ${sortedproductname}
     Lists Should Be Equal   ${sortedproductname}    ${ProductNames}
