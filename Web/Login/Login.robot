@@ -355,7 +355,7 @@ Clicking on sort icon # Sort in descending order (A-z)
     Log    ${ProductNames}
     Append To List    ${ProductNames}    ${Producttext}                  ## add an element to existing list
     ${sortedproductname}    copy list  ${ProductNames}
-    Sort List    ${sortedproductname}
+    Sort List    ${sortedproductname}                   ## Sort list
     Lists Should Be Equal   ${sortedproductname}    ${ProductNames}
 
 
