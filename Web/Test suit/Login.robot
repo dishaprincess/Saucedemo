@@ -47,3 +47,14 @@ Login with locked out user
      ${Message1}  Get Text   //h3[@data-test='error']
      Should Be Equal As Strings   ${Message1}   Epic sadface: Sorry, this user has been locked out.
 
+Login and Then logot valid credentials
+    Open Browser    ${URL}    ${BROWSER}
+    Sleep    5s
+    Input Text    id:user-name    ${USERNAME}
+    Input Text    id:password     ${PASSWORD}
+    Click Element   id:login-button
+    Sleep    10s
+    Click Element    Xpath= //button[@id='react-burger-menu-btn']
+    Sleep       10s
+    Wait Until Element Is Visible     xpath=//*[text()='Logout']    10s
+    Click Element    xpath=//*[text()='Logout']
