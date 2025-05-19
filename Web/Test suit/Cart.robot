@@ -1,24 +1,21 @@
 *** Settings ***
-Library         SeleniumLibrary
+Library    SeleniumLibrary
 Library    RequestsLibrary
 Library    Collections
 Library    String
+Resource   ../CommonKeywords.robot    # Adjust path as needed
+
 *** Variables ***
 ${URL}           https://www.saucedemo.com/
 ${BROWSER}       chrome
 ${USERNAME}      standard_user
 ${PASSWORD}      secret_sauce
-
+Resource   ../CommonKeywords.robot
 *** Test Cases ***
 
 Add to cart functionality
-    Open Browser     ${URL}    ${BROWSER}
-    Sleep    5s
-
-    Input Text    id:user-name    ${USERNAME}
-    Input Text    id:password     ${PASSWORD}
-    Click Element       id:login-button
-    Sleep    5s
+    Login To Application
+    Sleep    15s
     Click Element    xpath=//button[@id='react-burger-menu-btn']
     Wait Until Element Is Visible    xpath=//*[text()='All Items']    timeout=10s
     Click Element       xpath=//*[text()='All Items']
@@ -26,12 +23,8 @@ Add to cart functionality
     Click Element   xpath= //button[@id='add-to-cart-sauce-labs-backpack']              # Add item from list to cart
 
 View items in cart
-    Open Browser     ${URL}    ${BROWSER}
-    Sleep    5s
-    Input Text    id:user-name    ${USERNAME}
-    Input Text    id:password     ${PASSWORD}
-    Click Element   id:login-button
-    Sleep    5s
+    Login To Application
+    Sleep    10s
     Click Element    xpath://button[@id='react-burger-menu-btn']
     Wait Until Element Is Visible    xpath=//*[text()='All Items']    timeout=10s
     Click Element       xpath://*[text()='All Items']
@@ -41,11 +34,7 @@ View items in cart
      ${Count}=  Get Text   //span[@class='shopping_cart_badge']
 
 Add and remove item
-    Open Browser     ${URL}    ${BROWSER}
-    Sleep    5s
-    Input Text    id:user-name    ${USERNAME}
-    Input Text    id:password     ${PASSWORD}
-    Click Element   id:login-button
+    Login To Application
     Sleep    5s
     Click Element    xpath://button[@id='react-burger-menu-btn']
     Wait Until Element Is Visible    xpath://*[text()='All Items']    timeout=20s
@@ -66,11 +55,7 @@ Add and remove item
      ${Count}=  Get Text   //span[@class='shopping_cart_badge']
 
 Clikcing on cart icon
-    Open Browser     ${URL}    ${BROWSER}
-    Sleep    5s
-    Input Text    id:user-name    ${USERNAME}
-    Input Text    id:password     ${PASSWORD}
-    Click Element   id:login-button
+    Login To Application
     Sleep    5s
     Click Element    xpath://button[@id='react-burger-menu-btn']
     Wait Until Element Is Visible    xpath://*[text()='All Items']    timeout=10s
@@ -81,11 +66,7 @@ Clikcing on cart icon
     Sleep    5s
     Click Element   xpath://div[@id='shopping_cart_container']
 Removing Item from cart
-   Open Browser     ${URL}    ${BROWSER}
-    Sleep    5s
-    Input Text    id:user-name    ${USERNAME}
-    Input Text    id:password     ${PASSWORD}
-    Click Element   id:login-button
+    Login To Application
     Sleep    5s
    Click Element   xpath://button[@id='add-to-cart-sauce-labs-backpack']
    Sleep        5s

@@ -8,16 +8,18 @@ ${URL}           https://www.saucedemo.com/
 ${BROWSER}       chrome
 ${USERNAME}      standard_user
 ${PASSWORD}      secret_sauce
-*** Test Cases ***
-Login with valid credentials
-    Open Browser    ${URL}    ${BROWSER}
+****Keywords*****
+Login To Application
+   Open Browser    ${URL}    ${BROWSER}
     Sleep    5s
     Input Text    id:user-name    ${USERNAME}
     Input Text    id:password     ${PASSWORD}
     Click Element   id:login-button
     Sleep    3s
     Close Browser
-
+*** Test Cases ***
+Login with valid credentials
+    Login To Application
 Login with invalid credentials
     Open Browser    ${URL}    ${BROWSER}
     Sleep    5s
@@ -48,13 +50,10 @@ Login with locked out user
      Should Be Equal As Strings   ${Message1}   Epic sadface: Sorry, this user has been locked out.
 
 Login and Then logot valid credentials
-    Open Browser    ${URL}    ${BROWSER}
-    Sleep    5s
-    Input Text    id:user-name    ${USERNAME}
-    Input Text    id:password     ${PASSWORD}
-    Click Element   id:login-button
+
+    Login To Application
     Sleep    10s
     Click Element    Xpath= //button[@id='react-burger-menu-btn']
-    Sleep       10s
+    Sleep       20s
     Wait Until Element Is Visible     xpath=//*[text()='Logout']    10s
     Click Element    xpath=//*[text()='Logout']
