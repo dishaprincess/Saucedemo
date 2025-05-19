@@ -1,8 +1,5 @@
 *** Settings ***
-Library         SeleniumLibrary
-Library    RequestsLibrary
-Library    Collections
-Library    String
+Resource   ../CommonKeywords.robot    # Adjust path as needed
 *** Variables ***
 ${URL}           https://www.saucedemo.com/
 ${BROWSER}       chrome
@@ -11,17 +8,12 @@ ${PASSWORD}      secret_sauce
 *** Test Cases ***
 
 Complete checkout
-
-    Open Browser     ${URL}    ${BROWSER}
-    Sleep    5s
-    Input Text    id:user-name    ${USERNAME}
-    Input Text    id:password     ${PASSWORD}
-    Click Element   id:login-button
+    Login To Application
     Sleep    5s
        ##Execute Javascript  document.getElementById("add-to-cart-sauce-labs-bolt-t-shirt").click()
-    Click Element   xpath://button[@id='add-to-cart-sauce-labs-backpack']
+    Add To Cart
     Sleep    5s
-    Click Element   xpath://div[@id='shopping_cart_container']
+    Click Shopping Cart
     Sleep    5s
     Click Element    id:checkout
     Sleep    3s
@@ -38,18 +30,14 @@ Complete checkout
     Should Be Equal    ${header}   Thank you for your order!
 
 Clicking on continue shopping option from cart
-    Open Browser     ${URL}    ${BROWSER}
+    Login To Application
     Sleep    5s
-    Input Text    id:user-name    ${USERNAME}
-    Input Text    id:password     ${PASSWORD}
-    Click Element   id:login-button
-    Sleep    5s
-
-   Click Element   xpath://button[@id='add-to-cart-sauce-labs-backpack']
-   Sleep        5s
-   Click Element   xpath://button[@id='add-to-cart-sauce-labs-bolt-t-shirt']
+       ##Execute Javascript  document.getElementById("add-to-cart-sauce-labs-bolt-t-shirt").click()
+    Add To Cart
+    Sleep        5s
+    Click Element   xpath://button[@id='add-to-cart-sauce-labs-bolt-t-shirt']
     Wait Until Element Is Visible    xpath://div[@id='shopping_cart_container']   timeout=10s
-    Click Element   xpath://div[@id='shopping_cart_container']
+    Click Shopping Cart
     Wait Until Element Is Visible    xpath://button[@id='remove-sauce-labs-backpack']    timeout=5s
     Click Element    id:remove-sauce-labs-backpack
     Sleep    5s
@@ -59,16 +47,12 @@ Clicking on continue shopping option from cart
     Should Be Equal    ${title}    Products
     Capture Page Screenshot
 Clicking Cancel button checkout
-    Open Browser     ${URL}    ${BROWSER}
-    Sleep    5s
-    Input Text    id:user-name    ${USERNAME}
-    Input Text    id:password     ${PASSWORD}
-    Click Element   id:login-button
+    Add To Cart
     Sleep    5s
        ##Execute Javascript  document.getElementById("add-to-cart-sauce-labs-bolt-t-shirt").click()
-    Click Element   xpath://button[@id='add-to-cart-sauce-labs-backpack']
+    Add To Cart
     Sleep    5s
-    Click Element   xpath://div[@id='shopping_cart_container']
+    Click Shopping Cart
     Sleep    10s
     Click Element    id:checkout
     Sleep    3s

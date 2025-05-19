@@ -1,21 +1,10 @@
 *** Settings ***
-Library         SeleniumLibrary
-Library    RequestsLibrary
-Library    Collections
-Library    String
-*** Variables ***
-${URL}           https://www.saucedemo.com/
-${BROWSER}       chrome
-${USERNAME}      standard_user
-${PASSWORD}      secret_sauce
+Resource   ../CommonKeywords.robot    # Adjust path as needed
+
 *** Test Cases ***
 
 Clicking on sort icon sorting price low to high
-    Open Browser     ${URL}    ${BROWSER}
-    Sleep    5s
-    Input Text    id:user-name    ${USERNAME}
-    Input Text    id:password     ${PASSWORD}
-    Click Element   id:login-button
+    Login To Application
     Sleep    5s
     ##pefroming sorting
     Click Element   xpath://select[@class='product_sort_container']
@@ -42,11 +31,7 @@ Clicking on sort icon sorting price low to high
     Lists Should Be Equal   ${sortedpricelist}    ${Pricelisttext}
 
 Clicking on sort icon sorting Name
-    Open Browser     ${URL}    ${BROWSER}
-    Sleep    5s
-    Input Text    id:user-name    ${USERNAME}
-    Input Text    id:password     ${PASSWORD}
-    Click Element   id:login-button
+    Login To Application
     Sleep    5s
     ##pefroming sorting
     Click Element   xpath://select[@class='product_sort_container']
@@ -68,11 +53,7 @@ Clicking on sort icon sorting Name
     Lists Should Be Equal   ${sortedproductname}    ${ProductNames}
 
 Clicking on sort icon # Sort in descending order (A-z)
-    Open Browser     ${URL}    ${BROWSER}
-    Sleep    5s
-    Input Text    id:user-name    ${USERNAME}
-    Input Text    id:password     ${PASSWORD}
-    Click Element   id:login-button
+    Login To Application
     Sleep    5s
     ##pefroming sorting
     Click Element   xpath://select[@class='product_sort_container']

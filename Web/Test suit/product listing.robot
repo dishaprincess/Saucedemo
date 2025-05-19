@@ -1,47 +1,26 @@
 *** Settings ***
-Library         SeleniumLibrary
-Library    RequestsLibrary
-Library    Collections
-Library    String
-*** Variables ***
-${URL}           https://www.saucedemo.com/
-${BROWSER}       chrome
-${USERNAME}      standard_user
-${PASSWORD}      secret_sauce
+Resource   ../CommonKeywords.robot    # Adjust path as needed
 *** Test Cases ***
 Clicking Humberger icon
-    Open Browser    ${URL}    ${BROWSER}
-    Sleep    5s
-    Input Text    id:user-name    ${USERNAME}
-    Input Text    id:password     ${PASSWORD}
-    Click Element   id:login-button
+    Login To Application
     Sleep    10s
-    Click Element    Xpath= //button[@id='react-burger-menu-btn']
+    Click Hamburger icon
     Sleep       10s
     Close Browser
 
 Clciking on all Items
-     Open Browser    ${URL}    ${BROWSER}
-    Sleep    5s
-
-    Input Text    id:user-name    ${USERNAME}
-    Input Text    id:password     ${PASSWORD}
-    Click Element   id:login-button
+    Login To Application
     Sleep    10s
-    Click Element    Xpath=//button[@id='react-burger-menu-btn']
+    Click Hamburger icon
     Sleep       10s
     Click Element       Xpath=//a[text()='All Items']
     Sleep   10s
     Close Browser
 
 Product listing loads
-    Open Browser    ${URL}    ${BROWSER}
+    Login To Application
     Sleep    5s
-    Input Text    id:user-name    ${USERNAME}
-    Input Text    id:password     ${PASSWORD}
-    Click Element   xpath=//input[@id='login-button']
-    Sleep    5s
-    Click Element    xpath=//button[@id='react-burger-menu-btn']
+    Click Hamburger icon
     Wait Until Element Is Visible    xpath=//*[text()='All Items']    timeout=10s
     Click Element       xpath=//*[text()='All Items']
     Sleep   5s
@@ -67,22 +46,14 @@ Understanding variable
     Lists Should Be Equal    @{all_titles}     @{Product}
 
 Click on product image/title
-     Open Browser    ${URL}    ${BROWSER}
-    Sleep    5s
-    Input Text    id:user-name    ${USERNAME}
-    Input Text    id:password     ${PASSWORD}
-    Click Element   xpath=//input[@id='login-button']
+    Login To Application
     Sleep    5s
     Click Element    //a[@id='item_4_img_link']
     ${label}    Get Text        //*[text()='Sauce Labs Backpack']
     Should Be Equal As Strings  ${label}    Sauce Labs Backpack
 
 Clicking on Back button from Product detail
-    Open Browser     ${URL}    ${BROWSER}
-    Sleep    5s
-    Input Text    id:user-name    ${USERNAME}
-    Input Text    id:password     ${PASSWORD}
-    Click Element  id:login-button
+    Login To Application
     Sleep    5s
     Click Element    //a[@id='item_4_img_link']
     ${label}    Get Text        //*[text()='Sauce Labs Backpack']
