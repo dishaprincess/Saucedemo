@@ -23,7 +23,7 @@ Add to cart functionality
     Wait Until Element Is Visible    xpath=//*[text()='All Items']    timeout=10s
     Click Element       xpath=//*[text()='All Items']
     Sleep   5s
-    Click Element   xpath= //button[@id='add-to-cart-sauce-labs-backpack']
+    Click Element   xpath= //button[@id='add-to-cart-sauce-labs-backpack']              # Add item from list to cart
 
 View items in cart
     Open Browser     ${URL}    ${BROWSER}
