@@ -8,7 +8,7 @@ ${URL}           https://www.saucedemo.com/
 ${BROWSER}       chrome
 ${USERNAME}      standard_user
 ${PASSWORD}      secret_sauce
-****Keywords*****
+*** Keywords ***
 Login To Application
     Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
@@ -17,7 +17,17 @@ Login To Application
     Input Text    id:password     ${PASSWORD}
     Click Element   id:login-button
     Sleep    3s
-
+Login To Application Invalid
+    [Arguments]         ${username}        ${password}    ${errormessage}
+    Open Browser    ${URL}    ${BROWSER}
+    Maximize Browser Window
+    Sleep    5s
+    Input Text    id:user-name    ${username}
+    Input Text    id:password     ${password}
+    Click Element   id:login-button
+    Sleep    3s
+    ${Message}  Get Text   //h3[@data-test='error']
+    Should Be Equal As Strings   ${Message}         ${errormessage}
 Add To Cart
     Click Element    xpath=//button[@id='react-burger-menu-btn']
     Wait Until Element Is Visible    xpath=//*[text()='All Items']    timeout=10s

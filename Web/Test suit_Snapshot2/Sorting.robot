@@ -1,5 +1,5 @@
 *** Settings ***
-Resource   CommonKeywords.robot    # Adjust path as needed
+Resource   ../CommonKeywords.robot    # Adjust path as needed
 
 *** Test Cases ***
 
